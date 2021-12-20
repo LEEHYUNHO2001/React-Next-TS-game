@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  memo,
-  useMemo,
-} from "react";
+import React, { useState, memo, useEffect } from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
@@ -38,12 +31,12 @@ const Answer = styled.span`
 `;
 
 // start 이벤트
-const start = (m, n, mine) => {
+const start = (m: number, n: number, mine: string) => {
   //n 크기 제한
   if (n >= 45) n = 45;
   //배열 갯수
   const candidate = Array(m * n)
-    .fill()
+    .fill("")
     .map((arr, i) => {
       return i;
     });
@@ -57,7 +50,7 @@ const start = (m, n, mine) => {
 
   let data = [];
   for (let i = 0; i < m; i++) {
-    let arr = [];
+    let arr: any = [];
     data.push(arr);
     for (let j = 0; j < n; j++) {
       arr.push("꼍");
@@ -69,16 +62,22 @@ const start = (m, n, mine) => {
   return data;
 };
 
-const GameForm = ({ value, setValue, answer, setAnswer }) => {
+interface GameFormProps {
+  setValue: any;
+  answer: any;
+  setAnswer: any;
+}
+
+const GameForm: React.FC<GameFormProps> = ({ setValue, answer, setAnswer }) => {
   const [m, setM] = useState(3);
   const [n, setN] = useState(3);
   const [mine, setMine] = useState("펑");
 
-  const onChangeM = (e) => {
+  const onChangeM = (e: any) => {
     setM(e.target.value);
   };
 
-  const onChangeN = (e) => {
+  const onChangeN = (e: any) => {
     setN(e.target.value);
   };
 

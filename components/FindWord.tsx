@@ -1,11 +1,5 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  memo,
-  useMemo,
-} from "react";
+import type { NextPage } from "next";
+import React, { useState, memo } from "react";
 import styled from "styled-components";
 
 import GameMain from "./findword/GameMain";
@@ -21,7 +15,7 @@ const Main = styled.main`
 `;
 // styled 끝
 
-const FindWord = memo(() => {
+const FindWord: React.FC = () => {
   const [value, setValue] = useState([]);
   const [answer, setAnswer] = useState("");
   return (
@@ -29,21 +23,11 @@ const FindWord = memo(() => {
       <Main>
         <h1>다른 글자 찾기</h1>
         <span>첫 난이도를 결정하세요.</span>
-        <GameForm
-          value={value}
-          setValue={setValue}
-          answer={answer}
-          setAnswer={setAnswer}
-        />
-        <GameMain
-          value={value}
-          setValue={setValue}
-          answer={answer}
-          setAnswer={setAnswer}
-        />
+        <GameForm setValue={setValue} answer={answer} setAnswer={setAnswer} />
+        <GameMain value={value} setAnswer={setAnswer} />
       </Main>
     </>
   );
-});
+};
 
 export default FindWord;
